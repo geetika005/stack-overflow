@@ -1,4 +1,3 @@
-import React from "react";
 import Auth from "./Pages/Auth/Auth";
 import { Routes, Route } from "react-router-dom";
 import Questions from "./Pages/Questions/Questions";
@@ -9,6 +8,10 @@ import DisplayQuestion from "./Pages/Questions/DisplayQuestion";
 import UserProfile from "./Pages/UserProfile/UserProfile";
 import Users from "./Pages/Users/Users";
 import { ChatAI } from "./Pages/ChatAI/ChatAi";
+import { Verify } from "./Pages/Verify/Verify";
+import { Social } from "./Pages/Social/Social";
+import PrivateRoute from "./PrivateRoutes";
+import { PostForm } from "./Pages/Social/PostForm";
 
 const AllRoutes = () => {
   return (
@@ -21,7 +24,15 @@ const AllRoutes = () => {
       <Route path="/Tags" element={<Tags />} />
       <Route path="/Users" element={<Users />} />
       <Route path="/Users/:id" element={<UserProfile />} />
-      <Route path="/ChatAi" element={<ChatAI />} />
+
+      {/* Private routes */}
+
+      <Route path="/" element={<PrivateRoute />}>
+        <Route path="/social" element={<Social />} />
+        <Route path="/chatai" element={<ChatAI />} />
+        <Route path="/verify" element={<Verify />} />
+        <Route path="/social/addpost" element={<PostForm />} />
+      </Route>
     </Routes>
   );
 };

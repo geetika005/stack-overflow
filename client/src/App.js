@@ -8,6 +8,7 @@ import { fetchAllQuestions } from "./actions/question";
 import { fetchAllUsers } from "./actions/users";
 import { SidebarProvider } from "./components/LeftSidebar/LeftSidebarContext";
 import { fetchChat } from "./actions/chat";
+import { setCurrentUser } from "./actions/currentUser";
 
 function App() {
   const dispatch = useDispatch();
@@ -16,6 +17,8 @@ function App() {
     dispatch(fetchAllQuestions());
     dispatch(fetchAllUsers());
     dispatch(fetchChat());
+    const user = JSON.parse(localStorage.getItem("Profile"));
+    if (user?.result) dispatch(setCurrentUser(user.result));
   }, [dispatch]);
 
   return (

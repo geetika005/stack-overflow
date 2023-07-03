@@ -1,5 +1,5 @@
 .chat-container {
-  min-height: 90vh;
+  min-height: 75vh;
   margin: 20px 0;
   width: 100%;
 }
@@ -12,9 +12,9 @@
   align-items: end;
   padding: 1rem;
   border-radius: 8px;
-  height: 100%;
-  width: 100%;
+  width: 90%;
   gap: 1rem;
+  margin: 0 auto;
 }
 
 .chatai-textarea {
@@ -44,4 +44,49 @@
   border: #ef8236 1px solid;
   background-color: #fff;
   border-radius: 4px;
+}
+
+.go-down-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.icon-position {
+  padding: 12px;
+  position: fixed;
+  background: #ef8236;
+  color: #f5f5f5;
+  bottom: 32px;
+  right: 16px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+}
+
+[data-show-scroll-to-down="true"] {
+  animation: fade-in 0.3s forwards;
+}
+
+[data-show-scroll-to-down="false"] {
+  animation: fade-out 0.3s forwards;
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

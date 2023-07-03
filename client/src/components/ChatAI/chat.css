@@ -25,3 +25,15 @@
 .message-box {
   width: 100%;
 }
+
+.chat-empty-con {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75dvh;
+  text-align: center;
+}
+
+.chat-empty-sub-con p {
+  margin-top: 8px;
+}

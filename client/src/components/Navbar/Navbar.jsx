@@ -12,8 +12,7 @@ import { useLogo } from "../../hook/useLogo";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  var User = useSelector((state) => state.currentUserReducer);
-
+  const User = useSelector((state) => state.currentUserReducer);
   const navigate = useNavigate();
 
   const [showSearch, setShowSearch] = useState(false);
@@ -27,15 +26,16 @@ const Navbar = () => {
   }, [dispatch, navigate]);
 
   useEffect(() => {
-    const token = User?.token;
+    const user = JSON.parse(localStorage.getItem("Profile"));
+    const token = user?.token;
     if (token) {
       const decodedToken = decode(token);
       if (decodedToken.exp * 1000 < new Date().getTime()) {
         handleLogout();
       }
     }
-    dispatch(setCurrentUser(JSON.parse(localStorage.getItem("Profile"))));
-  }, [User?.token, dispatch, handleLogout]);
+    // if (user?.result) dispatch(setCurrentUser(user.result));
+  }, [dispatch, handleLogout]);
 
   return (
     <nav className="main-nav">
@@ -67,7 +67,7 @@ const Navbar = () => {
               onClick={() => setShowSearch(!showSearch)}
             />
           </form>
-          {User === null ? (
+          {!User ? (
             <Link
               to="/Auth"
               className="nav-item nav-links"
@@ -79,13 +79,13 @@ const Navbar = () => {
             <>
               <Avatar classname={"avatar-user-nav"}>
                 <Link
-                  to={`/Users/${User?.result?._id}`}
+                  to={`/Users/${User?._id}`}
                   style={{
                     color: "white",
                     textDecoration: "none",
                   }}
                 >
-                  <p>{User.result.name.charAt(0).toUpperCase()}</p>
+                  <p>{User?.name[0].toUpperCase()}</p>
                 </Link>
               </Avatar>
               <button className="nav-item nav-links" onClick={handleLogout}>

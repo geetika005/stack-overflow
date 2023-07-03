@@ -180,7 +180,7 @@
 /* * Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 900px) {
   .main-nav {
-    min-height: 50px;
+    height: 60px;
     width: 100%;
     margin: 0% auto;
     border-top: solid 3px #ef8236;
@@ -190,6 +190,7 @@
     justify-content: center;
     align-items: center;
     position: relative;
+    position: fixed;
   }
 
   .navbar {

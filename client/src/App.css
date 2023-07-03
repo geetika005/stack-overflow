@@ -47,5 +47,7 @@
 @media only screen and (min-width: 992px) {
   .home-container-2 {
     width: calc(100% - 164px);
+    margin-left: 164px;
+    margin-top: 62px;
   }
 }

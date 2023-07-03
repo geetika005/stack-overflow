@@ -3,10 +3,11 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 
-import userRoutes from "./routes/users.js";
-import questionRoutes from "./routes/Questions.js";
-import answerRoutes from "./routes/Answers.js";
-import chatRoutes from "./routes/ChatAi.js";
+import userRoutes from "./routes/users.routes.js";
+import questionRoutes from "./routes/Questions.routes.js";
+import answerRoutes from "./routes/Answers.routes.js";
+import chatRoutes from "./routes/ChatAi.routes.js";
+import socialRoutes from "./routes/Social.routes.js";
 
 const app = express();
 dotenv.config();
@@ -20,9 +21,10 @@ app.use(
 );
 
 app.use("/chat/", chatRoutes);
-app.use("/user", userRoutes);
-app.use("/questions", questionRoutes);
-app.use("/answer", answerRoutes);
+app.use("/user/", userRoutes);
+app.use("/questions/", questionRoutes);
+app.use("/answer/", answerRoutes);
+app.use("/social/post/", socialRoutes);
 
 app.get("/", (req, res) => {
   res.send("This is a stack overflow clone API");

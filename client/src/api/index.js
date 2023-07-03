@@ -13,6 +13,8 @@ API.interceptors.request.use((req) => {
 //  * User routes
 export const logIn = (authData) => API.post("/user/login", authData);
 export const signUp = (authData) => API.post("/user/signup", authData);
+export const sendOtp = () => API.get("/user/sendOtp");
+export const verifyUser = (otp) => API.post("/user/verify", { otp });
 
 //  * questions routes
 export const postQuestion = (questionData) =>
@@ -37,3 +39,11 @@ export const updateProfile = (id, updateData) =>
 export const postChat = (promptValue) =>
   API.post("/chat/add", { message: promptValue });
 export const getChat = () => API.get("/chat/get");
+
+// * social routes
+export const getPosts = () => API.get("/social/post/all");
+export const addPost = (description, url) =>
+  API.post("/social/post/create", { description, url });
+
+export const likePost = (id) => API.patch(`/social/post/like/${id}`);
+export const unlikePost = (id) => API.patch(`/social/post/unlike/${id}`);

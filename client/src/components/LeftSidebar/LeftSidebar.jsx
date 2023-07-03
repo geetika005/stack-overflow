@@ -51,13 +51,22 @@ const LeftSidebar = memo(() => {
               <p>Users</p>
             </NavLink>
             <NavLink
-              to="/ChatAi"
+              to="/chatai"
               className="side-nav-links"
               activeclassname="active"
               style={{ paddingLeft: "40px" }}
               onClick={toggleSidebar}
             >
               <p>Chat AI</p>
+            </NavLink>
+            <NavLink
+              to="/social"
+              className="side-nav-links"
+              activeclassname="active"
+              style={{ paddingLeft: "40px" }}
+              onClick={toggleSidebar}
+            >
+              <p>Posts</p>
             </NavLink>
           </div>
         </nav>

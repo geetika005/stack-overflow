@@ -39,6 +39,7 @@
     background-color: #fdf7e2;
     border-bottom: solid 1px #edeff0;
     flex-direction: column;
+    margin-top: 8px;
   }
 
   .display-votes-ans-container {
@@ -153,6 +154,7 @@
     background-color: #fdf7e2;
     border-bottom: solid 1px #edeff0;
     flex-direction: column;
+    margin-top: 12px;
   }
 
   .display-question-container .display-votes-ans {
@@ -254,6 +256,7 @@
     align-items: center;
     background-color: #fdf7e2;
     border-bottom: solid 1px #edeff0;
+    margin-top: 12px;
   }
 
   .display-question-container .display-votes-ans {

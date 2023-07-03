@@ -6,6 +6,7 @@ export const postChat = (prompt) => async (dispatch) => {
     const { data } = await api.postChat(prompt);
     dispatch({ type: "FETCH_CHAT", payload: data.chat.chat });
   } catch (error) {
+    dispatch({ type: "CHAT_END_LOADING" });
     const err = { success: false, message: "something went wrong, try again" };
     dispatch({ type: "SET_ERROR", payload: err });
   }
@@ -19,6 +20,7 @@ export const fetchChat = () => async (dispatch) => {
     const { chat } = data.chat;
     dispatch({ type: "FETCH_CHAT", payload: chat });
   } catch (error) {
+    dispatch({ type: "CHAT_END_LOADING" });
     const err = { success: false, message: "something went wrong, try again" };
     dispatch({ type: "SET_ERROR", payload: err });
   }
