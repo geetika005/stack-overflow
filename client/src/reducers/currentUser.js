@@ -1,7 +1,6 @@
 const currentUserReducer = (state = null, action) => {
   switch (action.type) {
     case "FETCH_CURRENT_USER":
-      console.log(action.payload, "pla");
       const data = action.payload?.result
         ? action.payload.result
         : action.payload;
