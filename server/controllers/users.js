@@ -103,12 +103,12 @@ export const follow = async (req, res) => {
   try {
     const follower = await users.findByIdAndUpdate(
       userId,
-      { $push: { followers: id }, $inc: { totalFollowers: 1 } },
+      { $addToSet: { followers: id }, $inc: { totalFollowers: 1 } },
       { new: true }
     );
     return res.status(202).json({
       success: true,
-      follower,
+      user: follower,
     });
   } catch (error) {
     return res.status(500).json({
@@ -129,7 +129,7 @@ export const unfollow = async (req, res) => {
     );
     return res.status(202).json({
       success: true,
-      follower,
+      user: follower,
     });
   } catch (error) {
     return res.status(500).json({

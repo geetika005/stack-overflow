@@ -10,6 +10,7 @@ import Avatar from "../../components/Avatar/Avatar";
 import EditProfileForm from "./EditProfileForm";
 import ProfileBio from "./ProfileBio";
 import "./UsersProfile.css";
+import { ProfilePosts } from "../../components/Social/ProfilePosts";
 
 const UserProfile = () => {
   const { id } = useParams();
@@ -17,6 +18,8 @@ const UserProfile = () => {
   const currentProfile = users.filter((user) => user._id === id)[0];
   const currentUser = useSelector((state) => state.currentUserReducer);
   const [Switch, setSwitch] = useState(false);
+
+  console.log(users);
 
   return (
     <div className="home-container-1">
@@ -36,7 +39,7 @@ const UserProfile = () => {
                 </p>
               </div>
             </div>
-            {currentUser?.result._id === id && (
+            {currentUser?._id === id && (
               <button
                 type="button"
                 onClick={() => setSwitch(true)}
@@ -57,6 +60,7 @@ const UserProfile = () => {
             )}
           </div>
         </section>
+        <ProfilePosts />
       </div>
     </div>
   );

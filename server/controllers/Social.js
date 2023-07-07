@@ -130,8 +130,30 @@ export const deletePost = async (req, res) => {
   const { id } = req.params;
   const userId = req.userId;
 
+  if (!id || !userId) {
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong",
+    });
+    return;
+  }
+
+  if (
+    !mongoose.Types.ObjectId.isValid(id) ||
+    !mongoose.Types.ObjectId.isValid(userId)
+  ) {
+    return res.status(404).json({
+      success: false,
+      message: "Post not found",
+    });
+  }
+
+  console.log(id, userId);
+
   try {
     const post = await Post.findOne({ _id: id, postBy: userId });
+
+    console.log(post);
 
     if (!post) {
       return res.status(404).json({
@@ -184,7 +206,10 @@ export const getAllPosts = async (req, res) => {
 export const getPostById = async (req, res) => {
   try {
     const { id } = req.params;
-    const post = await Post.findById(id).lean();
+    const post = await Post.findById(id)
+      .populate("postBy", "name _id")
+      .select("-__v")
+      .lean();
     if (!post) {
       res.status(404).json({
         success: false,
@@ -194,12 +219,45 @@ export const getPostById = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      post,
+      posts: [post],
     });
   } catch (error) {
     res.status(500).json({
       success: false,
       message: "Unable to get post, try again later",
+    });
+  }
+};
+
+export const getUserPost = async (req, res) => {
+  const userId = req.params.id;
+  if (!userId) {
+    res.status(404).json({
+      success: false,
+      message: "User not found",
+    });
+    return;
+  }
+  try {
+    const posts = await Post.find({ postBy: userId })
+      .populate("postBy", "name _id")
+      .select("-__v")
+      .lean();
+    if (!posts) {
+      res.status(404).json({
+        success: false,
+        message: "Posts are not found",
+      });
+      return;
+    }
+    res.status(200).json({
+      success: true,
+      posts,
+    });
+  } catch (error) {
+    res.status(404).json({
+      success: false,
+      message: "Something went wrong",
     });
   }
 };

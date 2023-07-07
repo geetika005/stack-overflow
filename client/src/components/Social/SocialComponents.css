@@ -176,3 +176,67 @@
   cursor: pointer;
   transition: all ease-in-out 0.3s;
 }
+
+/* * profile posts styles  */
+.profile-posts-contianer {
+  margin-top: 2rem;
+}
+.profile-posts-contianer h4 {
+  font-size: 1.4rem;
+}
+.profile-posts {
+  display: flex;
+  gap: 1rem;
+  width: min(90%, 70%);
+}
+.profile-post {
+  cursor: pointer;
+  overflow: hidden;
+  width: 100%;
+}
+
+.profile-post-img {
+  aspect-ratio: 1/1;
+  height: 200px;
+  width: 200px;
+  overflow: hidden;
+  background-position: 0%;
+  background-repeat: no-repeat;
+  border-radius: 12px;
+  background-size: cover;
+}
+
+@media only screen and (max-width: 600px) {
+  .profile-posts {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .profile-post-img {
+    aspect-ratio: 1/1;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .profile-posts {
+    width: 100%;
+  }
+  .profile-post-img {
+    aspect-ratio: 1/1;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .profile-posts {
+    width: 70%;
+    margin: 2rem auto 0;
+  }
+}

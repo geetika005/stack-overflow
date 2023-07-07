@@ -5,35 +5,48 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHeart,
   faArrowUpRightFromSquare,
-  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { likePost, unlikePost } from "../../actions/social";
 
 export const Post = memo(
-  ({ description, postBy, handleUserClick, url, _id, totalLikes }) => {
+  ({
+    description,
+    postBy,
+    handleUserClick,
+    url,
+    _id,
+    showDelete,
+    handleShareClick,
+    handleFollowers,
+    handleDelete,
+  }) => {
     const user = useSelector((state) => state.currentUserReducer);
     const dispatch = useDispatch();
-    const [isFollow, setIsFollow] = useState("follow");
+    const [isFollow, setIsFollow] = useState(false);
     const [isLiked, setIsLiked] = useState(false);
     const [isOwner, setIsOwner] = useState(false);
-
-    // console.log(user);
+    console.log(user);
     useEffect(() => {
-      let isOwner = user.posts?.findIndex((val) => val === _id);
+      console.log(user, "user in post");
+      let isOwner = !user
+        ? undefined
+        : user.posts?.findIndex((val) => val === _id);
       setIsOwner(isOwner !== undefined && isOwner !== -1 ? true : false);
     }, []);
 
     useEffect(() => {
-      let isFollow = user.followers?.findIndex((val) => val === postBy._id);
-      setIsFollow(
-        isFollow !== undefined && isFollow !== -1 ? "unfollow" : "follow"
-      );
+      let isFollow = !user
+        ? undefined
+        : user.followers?.findIndex((val) => val === postBy._id);
+      setIsFollow(isFollow !== undefined && isFollow !== -1 ? true : false);
     }, []);
 
     useEffect(() => {
-      let isLiked = user.likedPosts?.findIndex((val) => val === _id);
+      let isLiked = !user
+        ? undefined
+        : user.likedPosts?.findIndex((val) => val === _id);
       setIsLiked(isLiked !== undefined && isLiked !== -1 ? true : false);
     }, []);
 
@@ -57,9 +70,26 @@ export const Post = memo(
             <p>{postBy?.name}</p>
           </div>
           {!isOwner ? (
-            <button className="follow-btn">{isFollow}</button>
+            <button
+              className="follow-btn"
+              onClick={() => {
+                handleFollowers(postBy._id, isFollow);
+                setIsFollow(!isFollow);
+              }}
+            >
+              {isFollow ? "unfollow" : "follow"}
+            </button>
           ) : (
-            <FontAwesomeIcon icon={faTrash} size="lg" />
+            showDelete && (
+              <button
+                className="follow-btn"
+                onClick={() => {
+                  handleDelete(_id);
+                }}
+              >
+                {"Delete"}
+              </button>
+            )
           )}
         </div>
         <div className="image">
@@ -79,8 +109,13 @@ export const Post = memo(
             onClick={() => handleIsLike()}
             className="like-icon"
           />
-
-          <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="lg" />
+          <FontAwesomeIcon
+            icon={faArrowUpRightFromSquare}
+            size="lg"
+            onClick={() => {
+              handleShareClick(_id);
+            }}
+          />
         </section>
         <div className="post-card-footer-container">
           <p>{description}</p>

@@ -13,6 +13,10 @@ const userSchema = mongoose.Schema({
   totalFollowers: { type: Number, default: 0, required: true },
   followers: [{ type: Types.ObjectId, ref: "User" }],
   likedPosts: [{ type: Types.ObjectId, ref: "Post" }],
+  subscription: { type: String, default: "free" },
+  subsExpire: { type: Number, default: 0 },
+  lastQuestionDate: { type: Number },
+  todayQuestionCount: { type: Number, default: 0 },
 });
 
 export default mongoose.model("User", userSchema);

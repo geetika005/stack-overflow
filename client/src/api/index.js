@@ -42,8 +42,21 @@ export const getChat = () => API.get("/chat/get");
 
 // * social routes
 export const getPosts = () => API.get("/social/post/all");
+export const getUserPosts = (id) => API.get(`/social/post/userPosts/${id}`);
+export const getPostById = (id) => API.get(`/social/post/${id}`);
 export const addPost = (description, url) =>
   API.post("/social/post/create", { description, url });
 
 export const likePost = (id) => API.patch(`/social/post/like/${id}`);
 export const unlikePost = (id) => API.patch(`/social/post/unlike/${id}`);
+export const deletePost = (id) => API.delete(`/social/post/${id}`);
+
+export const follow = (id) => API.post(`/user/follow`, { id: id });
+export const unfollow = (id) => API.post(`/user/unfollow`, { id: id });
+
+// * subscription routes
+export const order = (amount) => API.post("/subscription/order", { amount });
+export const verifyOrder = (id, amount, response) =>
+  API.post("/subscription/is-order-complete", { id, amount, response });
+export const checkSubs = (userId) =>
+  API.get(`/subscription/check-subscription/${userId}`);

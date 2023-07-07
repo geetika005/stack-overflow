@@ -7,6 +7,7 @@ import chatReducer from "./chat";
 import errorReducer from "./error";
 import loadingReducer from "./loading";
 import socialReducer from "./social";
+import subscriptionReducer from "./subscription";
 
 export default combineReducers({
   authReducer,
@@ -17,4 +18,5 @@ export default combineReducers({
   errorReducer,
   loadingReducer,
   socialReducer,
+  subscriptionReducer,
 });

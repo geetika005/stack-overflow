@@ -2,9 +2,17 @@ import React, { useEffect } from "react";
 import "./Dialog.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import { WhatsappIcon, FacebookIcon, LinkedinIcon } from "react-share";
+import {
+  WhatsappIcon,
+  FacebookIcon,
+  LinkedinIcon,
+  WhatsappShareButton,
+  FacebookShareButton,
+  LinkedinShareButton,
+} from "react-share";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
-export const Dialog = ({ children, isOpen = true, setIsOpen, url }) => {
+export const Dialog = ({ isOpen = true, setIsOpen, url }) => {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -12,19 +20,41 @@ export const Dialog = ({ children, isOpen = true, setIsOpen, url }) => {
       document.body.style.overflow = "auto";
     }
   });
+
+  console.log(url);
   return (
     <>
       {isOpen && (
-        <div className="dialog" onClick={() => setIsOpen(false)}>
+        <div className="dialog-overlay">
           <div className="dialog-container">
             <div className="dialog-header">
               <h4>Social share</h4>
-              <FontAwesomeIcon icon={faXmark} className="xmark-icon" />
+              <FontAwesomeIcon
+                icon={faXmark}
+                className="xmark-icon"
+                onClick={() => setIsOpen(false)}
+              />
             </div>
             <div className="social-share-container">
-              <WhatsappIcon round size={35} url={url} />
-              <FacebookIcon round size={35} url={url} />
-              <LinkedinIcon round size={35} url={url} />
+              <div className="copy-to-clipboard">
+                <CopyToClipboard
+                  text={url}
+                  onCopy={() => {
+                    setIsOpen(false);
+                  }}
+                >
+                  <button>{"Copy url"}</button>
+                </CopyToClipboard>
+              </div>
+              <WhatsappShareButton url={url} onClick={() => setIsOpen(false)}>
+                <WhatsappIcon round size={35} />
+              </WhatsappShareButton>
+              <FacebookShareButton url={url} onClick={() => setIsOpen(false)}>
+                <FacebookIcon round size={35} />
+              </FacebookShareButton>
+              <LinkedinShareButton url={url} onClick={() => setIsOpen(false)}>
+                <LinkedinIcon round size={35} />
+              </LinkedinShareButton>
             </div>
           </div>
         </div>

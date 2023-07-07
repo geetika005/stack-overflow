@@ -12,6 +12,8 @@ import { Verify } from "./Pages/Verify/Verify";
 import { Social } from "./Pages/Social/Social";
 import PrivateRoute from "./PrivateRoutes";
 import { PostForm } from "./Pages/Social/PostForm";
+import { PostMain } from "./Pages/Social/PostMain";
+import Subscription from "./Pages/Subscriptions/Subscription";
 
 const AllRoutes = () => {
   return (
@@ -20,14 +22,15 @@ const AllRoutes = () => {
       <Route path="/Auth" element={<Auth />} />
       <Route path="/AskQuestion" element={<AskQuestion />} />
       <Route path="/Questions" element={<Questions />} />
+      <Route path="/subscription" element={<Subscription />} />
       <Route path="/Questions/:id" element={<DisplayQuestion />} />
       <Route path="/Tags" element={<Tags />} />
       <Route path="/Users" element={<Users />} />
       <Route path="/Users/:id" element={<UserProfile />} />
-
       {/* Private routes */}
 
       <Route path="/" element={<PrivateRoute />}>
+        <Route path="/post/:id" element={<PostMain />} />
         <Route path="/social" element={<Social />} />
         <Route path="/chatai" element={<ChatAI />} />
         <Route path="/verify" element={<Verify />} />

@@ -68,6 +68,15 @@ const LeftSidebar = memo(() => {
             >
               <p>Posts</p>
             </NavLink>
+            <NavLink
+              to="/subscription"
+              className="side-nav-links"
+              activeclassname="active"
+              style={{ paddingLeft: "40px" }}
+              onClick={toggleSidebar}
+            >
+              <p>Subscription</p>
+            </NavLink>
           </div>
         </nav>
       </div>

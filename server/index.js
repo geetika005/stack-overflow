@@ -8,6 +8,7 @@ import questionRoutes from "./routes/Questions.routes.js";
 import answerRoutes from "./routes/Answers.routes.js";
 import chatRoutes from "./routes/ChatAi.routes.js";
 import socialRoutes from "./routes/Social.routes.js";
+import subsRoutes from "./routes/subscription.routes.js";
 
 const app = express();
 dotenv.config();
@@ -25,6 +26,7 @@ app.use("/user/", userRoutes);
 app.use("/questions/", questionRoutes);
 app.use("/answer/", answerRoutes);
 app.use("/social/post/", socialRoutes);
+app.use("/subscription", subsRoutes);
 
 app.get("/", (req, res) => {
   res.send("This is a stack overflow clone API");
